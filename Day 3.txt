@@ -1,0 +1,121 @@
+Task 1: How to face having 2/3 years experience
+
+http://msp.rivannoc.com/otrs/index.pl
+un: admin
+pw: C1sc0123
+
+http://msp.rivannoc.com/otrs/customer.pl
+sj@goodyear.com
+
+Task 2: Network address, host address, IP address
+10.0.0.5/8 = IP address = network address + host address
+
+example:
+
+192.168.1.129/27 {4th, 32i}
+32i = 0, 32, 64, 128, 160, 192
+
+network address = 192.168.1.128/27
+
+
+How to route: static, default. ospf. eigrp, bgp, vpntunneling
+pickaposition:
+
+@R4: static
+
+conf t
+ip route 10.1.1.4 255.255.255.252 10.1.1.9
+ip route 10.1.1.0 255.255.255.252 10.1.1.9
+end
+
+@R3
+conf t
+ip route 10.1.1.0 255.255.255.252 10.1.1.5
+end
+
+@R2
+conf t
+ip route 10.1.1.8 255.255.255.252 10.1.1.6
+end
+
+@R1
+conf t
+ip route 10.1.1.8 255.255.255.252 10.1.1.2
+ip route 10.1.1.4 255.255.255.252 10.1.1.2
+end
+
+STATIC ROUTING FOR RUSSIAN IP ADDRESS:
+100.43.72.0/24		cisco: 10.1.1.19	linux:208.8.8.2		windows: 10.3.3.1
+CISCO: ip route 100.43.72.0 255.255.255.0 10.1.1.19
+LINUX: ip route add 100.43.72.0/24 via 208.8.8.2
+WINDOWS: route add 100.43.72.0 mask 255.255.255.0 10.3.3.1
+
+
+
+Task 4: removing static route
+
+@R4: static
+
+conf t
+no ip route 10.1.1.4 255.255.255.252 10.1.1.9
+no ip route 10.1.1.0 255.255.255.252 10.1.1.9
+end
+
+@R3
+conf t
+no ip route 10.1.1.0 255.255.255.252 10.1.1.5
+end
+
+@R2
+conf t
+no ip route 10.1.1.8 255.255.255.252 10.1.1.6
+end
+
+@R1
+conf t
+no ip route 10.1.1.8 255.255.255.252 10.1.1.2
+no ip route 10.1.1.4 255.255.255.252 10.1.1.2
+end
+
+
+find the network address:
+
+192.168.1.100/26 = 192.168.1.64
+
+EIGRP: NETWORK 192.168.1.64 0.0.0.63
+OSPF: NETWORK 192.168.1.64 X.X.X.192 AREA 0
+BGP: NETWORK 192.168.1.64 MASK X.X.X.192
+
+192.168.1.205/27 = 192.168.1.192 {4th, 32i}
+
+EIGRP: NETWORK 192.168.1.192 0.0.0.31
+OSPF: NETWORK 192.168.1.192 X.X.X.224 AREA 0
+BGP: NETWORK 192.168.1.192 MASK X.X.X.224
+
+192.168.1.150/30 = 192.168.1.148
+192.168.1.131/28 = 192.168.1.128
+
+
+How to configure real world BGP:
+
+@R1
+
+conf t
+router bgp 1
+bgp router-id 1.1.1.1
+bgp log-neighbor-changes
+neighbor 208.8.8.4 remote-as-45
+neighbor 207.7.7.2 remote-as-2
+neighbor 209.9.9.3 remote-as-3
+address-family ipv4
+neighbor 208.8.8.4 activate
+neighbor 207.7.7.2 activate
+neighbor 209.9.9.3 activate
+network 209.9.9.0 mask 255.255.255.0
+network 208.8.8.0 mask 255.255.255.0
+network 207.7.7.0 mask 255.255.255.0
+network 10.1.1.0 mask 255.255.255.252
+
+
+HOMEWORK:
+
