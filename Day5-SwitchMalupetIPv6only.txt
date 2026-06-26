@@ -39,8 +39,8 @@ Task1: 5 mins answers:
 Total additional assigned /48s: ~18 individual /48 blocks beyond the initial /32.
 
 IPV6 SUBNETTING:
-fec0:aabb:fafa:dada::/64 subnet to 22 offices/subnets:
-Con:  22 -> 5bits
+fec0:aabb:fafa:dada::/64 subnet to  offices/subnets:
+Con:   -> 5bits
 Add: /64 + /5 = /69
 iChamba:
 	8  4  2   1    8  4  2   1     8  4  2   1    8  4  2   1 
