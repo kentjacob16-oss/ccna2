@@ -1,0 +1,26 @@
+CAFE:FAFA::2222
+BEBE:BABA:DEDE::2222
+
+bebe:baba:dede:8::2222
+bebe:baba:dede:8000::2222
+
+baba:7777:fefe::22
+bbbb:cccc:dddd::2222
+dddd:cccc:bbbb::2121
+
+2001:fd8:2212:2800::2222
+2001:fd8:2212:1000::2222
+2001:fd8:2212:00a0::2222
+2001:fd8:2212:00c0::2222
+
+config t
+hostname corebabaGLOBE
+Int vlan 1
+standby 1 ip 10.22.1.6
+standby 1 preempt
+standby 1 Priority 100
+end
+
+
+CGMA
+CuPaL
